@@ -37,13 +37,10 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
     @Override
     public ResponseCustomer updateCustomer(RequestCustomerDetail requestCustomer) {
         CustomerDetails customerDetails = getCustomer(requestCustomer.getUsername());
-        CustomerDetails value = CustomerDetails.builder()
-                .name(requestCustomer.getName())
-                .address(requestCustomer.getAddress())
-                .contact(requestCustomer.getContact())
-                .customer(customerService.getCustomer(requestCustomer.getUsername()))
-                .build();
-        customerDetailRepository.saveAndFlush(value);
+        customerDetails.setName(requestCustomer.getName());
+        customerDetails.setAddress(requestCustomer.getAddress());
+        customerDetails.setContact(requestCustomer.getContact());
+        CustomerDetails value = customerDetailRepository.saveAndFlush(customerDetails);
 
         return ResponseCustomer.builder()
                 .username(value.getCustomer().getUsername())
