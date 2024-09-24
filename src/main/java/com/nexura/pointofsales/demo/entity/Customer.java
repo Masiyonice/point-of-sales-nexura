@@ -1,13 +1,29 @@
 package com.nexura.pointofsales.demo.entity;
 
-import jakarta.persistence.Entity;
+import com.nexura.pointofsales.demo.constant.TableName;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "c_customer")
+@Entity
+@Builder
+@Table(name = TableName.CUSTOMER)
 public class Customer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @Column(name = "username",unique = true, nullable = false)
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+
 }
